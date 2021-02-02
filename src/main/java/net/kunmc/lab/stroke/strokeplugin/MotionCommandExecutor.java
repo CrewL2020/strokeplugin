@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 public class MotionCommandExecutor implements CommandExecutor{
 
     private final StrokePlugin plugin;
+    int cautionTitle[] = {5,30,5};
 
     public MotionCommandExecutor(StrokePlugin plugin) {
         this.plugin = plugin;
@@ -24,7 +25,7 @@ public class MotionCommandExecutor implements CommandExecutor{
                 return false;
             }
             for(Player p : Bukkit.getOnlinePlayers()){
-                p.sendTitle("Stroke Plugin","制作 CrewL2020",0,10,0);
+                p.sendTitle("Stroke Plugin","制作 CrewL2020",cautionTitle[0],cautionTitle[1],cautionTitle[2]);
             }
         }
 

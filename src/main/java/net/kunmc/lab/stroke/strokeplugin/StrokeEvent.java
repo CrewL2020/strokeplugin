@@ -3,7 +3,6 @@ package net.kunmc.lab.stroke.strokeplugin;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.SkyWalker;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.WeatherClear;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.JumpPad;
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.Attack;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,9 +24,8 @@ public class StrokeEvent implements Listener {
     boolean count = false;
     boolean chant = false;
 
-    int fadeIn = 0;
-    int stay = 10;
-    int fadeOut = 0;
+    int actionTitle[] = {0,10,0};
+    int cautionTitle[] = {5,30,5};
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
@@ -37,13 +35,13 @@ public class StrokeEvent implements Listener {
         items = player.getInventory().getItemInMainHand();
         String item = items.getType().toString();
 
-        if(item.equalsIgnoreCase("END_ROD")){
+        if(item.equalsIgnoreCase("BLAZE_ROD")){
             if(wayCode.length()>9){
                 player.setFireTicks(100);
                 wayCode.delete(0,20);
                 click = false;
                 chant = false;
-                player.sendTitle("","魔力が暴走した。",fadeIn,stay,fadeOut);
+                player.sendTitle("","魔力が暴走した。",cautionTitle[0],cautionTitle[1],cautionTitle[2]);
                 player.getWorld().createExplosion(player.getLocation(),0);
                 player.damage(4);
             }else if(click||chant){
@@ -58,10 +56,10 @@ public class StrokeEvent implements Listener {
                 if(Math.abs(playerPitch-basePitch)>sensi){
                     if(Math.signum(playerPitch-basePitch)==1){
                         wayCode.append("↓");
-                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
+                        player.sendTitle("",new String(wayCode),actionTitle[0],actionTitle[1],actionTitle[2]);
                     }else{
                         wayCode.append("↑");
-                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
+                        player.sendTitle("",new String(wayCode),actionTitle[0],actionTitle[1],actionTitle[2]);
                     }
                     basePitch = playerPitch;
                     baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
@@ -69,10 +67,10 @@ public class StrokeEvent implements Listener {
                 if(Math.abs(playerYaw-baseYaw)>sensi){
                     if(Math.signum(playerYaw-baseYaw)==1){
                         wayCode.append("→");
-                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
+                        player.sendTitle("",new String(wayCode),actionTitle[0],actionTitle[1],actionTitle[2]);
                     }else{
                         wayCode.append("←");
-                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
+                        player.sendTitle("",new String(wayCode),actionTitle[0],actionTitle[1],actionTitle[2]);
                     }
                     basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
                     baseYaw = playerYaw;
@@ -98,7 +96,7 @@ public class StrokeEvent implements Listener {
            || event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_BLOCK")
         ){
             click = true;
-            if(chant&&item.equalsIgnoreCase("END_ROD")){
+            if(chant&&item.equalsIgnoreCase("BLAZE_ROD")){
                 stroke = new String(wayCode);
                 int len = stroke.length();
                 StrokeAction(player,stroke);
@@ -125,7 +123,7 @@ public class StrokeEvent implements Listener {
                 jumppad.DropPad(player,stroke);
                 break;
             default:
-                player.sendTitle("",ChatColor.DARK_RED +stroke,fadeIn,stay,fadeOut);
+                player.sendTitle("",ChatColor.DARK_RED +stroke,actionTitle[0],actionTitle[1],actionTitle[2]);
                 break;
         }
     }

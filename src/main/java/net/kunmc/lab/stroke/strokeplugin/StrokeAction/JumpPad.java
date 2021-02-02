@@ -21,11 +21,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class JumpPad implements Listener{
     private Player player;
     private boolean count = false;
+    int cautionTitle[] = {5,30,5};
 
     public void DropPad(Player player,String stroke){
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
-        player.sendTitle("JumpPad dropped!", ChatColor.AQUA +stroke,0,10,0);
+        player.sendTitle("JumpPad dropped!", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
     }
 
     @EventHandler
