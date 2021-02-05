@@ -20,11 +20,11 @@ public class SkyWalker implements Listener{
         BukkitRunnable task = new BukkitRunnable() {
             int count = 0;
             public void run() {
-                Location startLoc = player.getLocation().subtract(r, r, r);
+                Location startLoc = player.getLocation().subtract(r, 1, r);
 
                 for (int i = startLoc.getBlockX(); i < startLoc.getBlockX() + r * 2; i++) {
                     for (int k = startLoc.getBlockZ(); k < startLoc.getBlockZ() + r * 2; k++) {
-                        Location loc = new Location(startLoc.getWorld(), i, startLoc.getBlockY() + 1, k);
+                        Location loc = new Location(startLoc.getWorld(), i, startLoc.getBlockY() , k);
                         Block b = loc.getBlock();
 
                         if (b.getType() == Material.AIR) {

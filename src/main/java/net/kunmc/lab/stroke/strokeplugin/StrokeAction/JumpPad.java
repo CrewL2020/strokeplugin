@@ -34,8 +34,8 @@ public class JumpPad implements Listener{
         player = event.getPlayer();
         String item = player.getInventory().getItemInMainHand().getType().toString();
 
-        if(event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_AIR")
-           || event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_BLOCK")
+        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
+           || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
         ){
             if(item.equalsIgnoreCase("END_ROD")){
                 count = true;

@@ -41,7 +41,7 @@ public class StrokeEvent implements Listener {
                 wayCode.delete(0,20);
                 click = false;
                 chant = false;
-                player.sendTitle("","魔力が暴走した。",cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+                player.sendTitle("",ChatColor.DARK_RED +"魔力が暴走した。",cautionTitle[0],actionTitle[1],cautionTitle[2]);
                 player.getWorld().createExplosion(player.getLocation(),0);
                 player.damage(4);
             }else if(click||chant){
@@ -92,8 +92,8 @@ public class StrokeEvent implements Listener {
         items = player.getInventory().getItemInMainHand();
         String item = items.getType().toString();
 
-        if(event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_AIR")
-           || event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_BLOCK")
+        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
+           || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
         ){
             click = true;
             if(chant&&item.equalsIgnoreCase("BLAZE_ROD")){
